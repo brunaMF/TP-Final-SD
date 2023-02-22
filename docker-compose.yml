@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:3001"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+  backend:
+    build: ./backend
+    environment:
+      - PORT=3000
+      - DB1=mongodb://api:1234@db1:27017/
+      - DB2=mongodb://api:1234@db2:27017/
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db1
+      - db2
+  db1:
+    image: mongo:6
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=api
+      - MONGO_INITDB_ROOT_PASSWORD=1234
+      - MONGO_INITDB_DATABASE=db1
+    volumes:
+      - db_1:/data/db
+
+  db2:
+    image: mongo:6
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=api
+      - MONGO_INITDB_ROOT_PASSWORD=1234
+      - MONGO_INITDB_DATABASE=db2
+    volumes:
+      - db_2:/data/db
+
+volumes:
+  db_1:
+  db_2:

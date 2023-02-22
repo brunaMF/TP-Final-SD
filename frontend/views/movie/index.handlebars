@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8"/>
+      <title>My App</title>
+      <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body>
+    <h1>Listagem de Movies</h1>
+    <form action="/remove" method="post">
+      <ul>
+        {{#each movies}}
+        <li>
+          {{nome}}
+          {{#if db1}}
+            <button type="submit" name="removeBD1" value={{nome}}>Remover de BD1</button>
+          {{/if}}
+          {{#if db2}}
+            <button type="submit" name="removeBD2" value={{nome}}>Remover de BD2</button>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+    </form>
+
+    <h1>Adicione um novo filme</h1>
+
+    <form action="/add" method="post">
+        <div class="container">
+            <div class="form-group">
+                <label for="inputNome" class="form-label mt-4">Nome</label>
+                <input 
+                type="text" 
+                class="form-control" 
+                id="nome" 
+                name="nome"
+                aria-describedby="nomeHelp" 
+                placeholder="">
+                <button type="submit" name="btDB1" class="btn btn-primary mt-4">Adicionar Filme</button>
+                <button type="submit" name="btDB2" class="btn btn-primary mt-4">Adicionar Filme</button>
+            </div>
+        </div>
+    </form>
+  </body>
+</html>

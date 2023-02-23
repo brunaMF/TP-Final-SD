@@ -4,8 +4,6 @@ services:
     build: ./frontend
     ports:
       - "80:3001"
-    volumes:
-      - ./frontend:/app
     depends_on:
       - backend
   backend:
@@ -16,8 +14,6 @@ services:
       - DB2=mongodb://api:1234@db2:27017/
     ports:
       - "3000:3000"
-    volumes:
-      - ./backend:/app
     depends_on:
       - db1
       - db2
